@@ -2,6 +2,8 @@
 // ИСПРАВЛЕННАЯ версия с проверками
 
 #include <Arduino.h>
+#include <WiFi.h>           // Добавлено!
+#include <BluetoothSerial.h> // Добавлено!
 #include <TFT_eSPI.h>
 #include <SPI.h>
 
