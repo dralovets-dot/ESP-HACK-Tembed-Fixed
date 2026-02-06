@@ -1,0 +1,47 @@
+name: Build ESP-HACK for T-Embed CC1101
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install PlatformIO
+      run: |
+        pip install --upgrade platformio
+        pio --version
+    
+    - name: Build for T-Embed CC1101
+      run: |
+        pio run -e lilygo-t-embed-cc1101
+    
+    - name: Upload Firmware Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: firmware-t-embed-cc1101
+        path: |
+          .pio/build/lilygo-t-embed-cc1101/firmware.bin
+          .pio/build/lilygo-t-embed-cc1101/firmware.elf
+        if-no-files-found: error
+    
+    - name: Create Release (if tagged)
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          .pio/build/lilygo-t-embed-cc1101/firmware.bin
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
