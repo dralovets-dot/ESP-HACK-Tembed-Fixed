@@ -1,5 +1,5 @@
-// User_Setup.h для LilyGo T-Embed CC1101
-// Автоматически копируется в библиотеку
+// Setup for LilyGo T-Embed CC1101
+// Based on official LilyGO examples
 
 #define USER_SETUP_INFO "LilyGo T-Embed CC1101"
 
@@ -10,14 +10,14 @@
 #define TFT_WIDTH  170
 #define TFT_HEIGHT 320
 
-// Pin definitions
+// Pin definitions (official from datasheet)
 #define TFT_MOSI 9
 #define TFT_SCLK 11
 #define TFT_CS   41
 #define TFT_DC   16
 #define TFT_RST  40
 
-// Backlight (не используется в библиотеке, управляем вручную)
+// Backlight
 #define TFT_BL   21
 
 // SPI frequency
