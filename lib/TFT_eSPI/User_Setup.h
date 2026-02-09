@@ -1,30 +1,9 @@
-// Setup for LilyGo T-Embed CC1101
-// Based on official LilyGO examples
+// User_Setup.h для LilyGo T-Embed CC1101
+// Должен быть включён ДО TFT_eSPI.h
 
-#define USER_SETUP_INFO "LilyGo T-Embed CC1101"
+#ifndef USER_SETUP_LOADED
+#define USER_SETUP_LOADED 1
+#endif
 
-// ST7789 driver
-#define ST7789_DRIVER
-
-// Display dimensions
-#define TFT_WIDTH  170
-#define TFT_HEIGHT 320
-
-// Pin definitions (official from datasheet)
-#define TFT_MOSI 9
-#define TFT_SCLK 11
-#define TFT_CS   41
-#define TFT_DC   16
-#define TFT_RST  40
-
-// Backlight
-#define TFT_BL   21
-
-// SPI frequency
-#define SPI_FREQUENCY  40000000
-
-// Font support
-#define LOAD_GLCD
-#define LOAD_FONT2
-#define LOAD_FONT4
-#define SMOOTH_FONT
+// Включаем официальный setup
+#include "User_Setups/Setup214_LilyGo_T_Embed_CC1101.h"
