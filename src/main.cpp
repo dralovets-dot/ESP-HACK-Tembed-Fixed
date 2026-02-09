@@ -5,19 +5,18 @@
 // Официальные пины из даташита
 #define BOARD_LORA_CS   12  // CC1101 CS
 #define BOARD_SD_CS     13  // SD Card CS
-#define TFT_CS          41  // Display CS (определится из User_Setup)
+// TFT_CS = 41 определён в User_Setup.h
 
 TFT_eSPI tft;
 
 void setup(void) {
-    // Отключаем WiFi для стабильности
+    // Отключаем WiFi
     WiFi.mode(WIFI_OFF);
     
     Serial.begin(115200);
     delay(500);
     
-    // ВАЖНО: Все CS пины в HIGH перед инициализацией!
-    // Это предотвращает конфликты на SPI шине
+    // ВАЖНО: Все CS пины в HIGH!
     pinMode(TFT_CS, OUTPUT);
     digitalWrite(TFT_CS, HIGH);
     pinMode(BOARD_SD_CS, OUTPUT);
@@ -25,7 +24,7 @@ void setup(void) {
     pinMode(BOARD_LORA_CS, OUTPUT);
     digitalWrite(BOARD_LORA_CS, HIGH);
     
-    // Питание периферии (GPIO46)
+    // Питание периферии
     pinMode(46, OUTPUT);
     digitalWrite(46, HIGH);
     delay(200);
@@ -36,9 +35,9 @@ void setup(void) {
     
     Serial.println("Init TFT...");
     
-    // Инициализация дисплея (официальный метод)
+    // Инициализация
     tft.begin();
-    tft.setRotation(1); // 0-3, подберите под себя
+    tft.setRotation(1);
     tft.fillScreen(TFT_BLACK);
     
     Serial.println("TFT OK!");
@@ -55,7 +54,6 @@ void setup(void) {
 }
 
 void loop(void) {
-    // Мигаем экраном для теста
     delay(2000);
     tft.fillScreen(TFT_BLUE);
     tft.setTextColor(TFT_WHITE, TFT_BLUE);
